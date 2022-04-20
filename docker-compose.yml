@@ -1,0 +1,29 @@
+version: '3.7'
+services: 
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: shisha_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+    networks:
+      - default
+    ports: 
+      - "3306:3306"
+    restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+        - db:db
+    ports:
+        - 8000:80
+    environment:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: test
+    restart: always
+    depends_on:
+      - db
