@@ -1,1 +1,0 @@
-create table bookings(id int);
