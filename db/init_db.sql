@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 23-Abr-2022 às 20:47
+-- Tempo de geração: 23-Abr-2022 às 22:54
 -- Versão do servidor: 8.0.28
 -- versão do PHP: 8.0.15
 
@@ -33,7 +33,8 @@ CREATE TABLE `bookings` (
   `num_persons` int DEFAULT NULL,
   `id_zone` int DEFAULT NULL,
   `order_food` tinyint(1) DEFAULT NULL,
-  `id_order` int DEFAULT NULL
+  `id_order` int DEFAULT NULL,
+  `orderStatus` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -69,6 +70,26 @@ INSERT INTO `menu` (`id`, `description`) VALUES
 (2, 'Taquitos'),
 (3, 'Tacos'),
 (4, 'Nachos');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `status`
+--
+
+CREATE TABLE `status` (
+  `id` int NOT NULL,
+  `statusDescription` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `status`
+--
+
+INSERT INTO `status` (`id`, `statusDescription`) VALUES
+(1, 'Fechada'),
+(2, 'Por Aprovar'),
+(3, 'Cancelada');
 
 -- --------------------------------------------------------
 
@@ -138,6 +159,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `users`
 --
 ALTER TABLE `users`
@@ -170,6 +197,12 @@ ALTER TABLE `clientOrder`
 --
 ALTER TABLE `menu`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `users`
